@@ -31,6 +31,8 @@ function fixFile(name: string, which: string) {
 		data = data.replace(regex, CONFIG.replace)
 		// console.log('\nAFTER >>>>\n\n', data)
 		return fs.writeFile(file, data)
+	}).catch(function(error) {
+		console.error('ERROR ->', error)
 	})
 }
 
@@ -53,9 +55,7 @@ Promise.all([
 	eachFile('typescript'),
 	eachFile('typescriptServices'),
 	eachFile('typingsInstaller'),
-]).catch(function(error) {
-	console.error('ERROR ->', error)
-}).then(function() {
+]).catch(Promise.resolve).then(function() {
 	console.log('DONE')
 	process.exit(0)
 })

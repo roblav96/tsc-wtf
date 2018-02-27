@@ -1,6 +1,6 @@
 {
 	"name": "tsc-wtf",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "WTF `tsc --watch` don't clear my terminal/console bro!",
 	"author": {
 		"name": "Robert Laverty",
