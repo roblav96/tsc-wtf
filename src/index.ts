@@ -53,7 +53,12 @@ Promise.all([
 	eachFile('typescript'),
 	eachFile('typescriptServices'),
 	eachFile('typingsInstaller'),
-]).then(() => console.log('DONE =]'))
+]).catch(function(error) {
+	console.error('ERROR ->', error)
+}).then(function() {
+	console.log('DONE')
+	process.exit(0)
+})
 
 
 
