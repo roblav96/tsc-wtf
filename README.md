@@ -1,4 +1,4 @@
-#### 😦 WTF `tsc --watch` don't clear my terminal/console bro!
+### 😦 WTF `tsc --watch` don't clear my terminal/console bro!
 
 # Install
 ```
