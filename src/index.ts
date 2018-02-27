@@ -6,11 +6,14 @@ import * as path from 'path'
 import * as shell from 'shelljs'
 
 const CONFIG = { find: `x1Bc`, replace: `n\\n` }
+const ROOTS = {
+	local: (shell.exec('npm root', { async: false, silent: true }).stdout as string).trim(),
+	global: (shell.exec('npm root -g', { async: false, silent: true }).stdout as string).trim(),
+}
 
-let lroot = (shell.exec('npm root', { async: false, silent: true }).stdout as string).trim()
-let groot = (shell.exec('npm root -g', { async: false, silent: true }).stdout as string).trim()
-
-function fixFile(file: string) {
+function fixFile(name: string, which: string) {
+	console.log(which.toUpperCase(), '->', name + '.js')
+	let file = path.resolve(ROOTS[which], 'typescript/lib', name + '.js')
 	return fs.readFile(file).then(function(buffer) {
 		let data = buffer.toString()
 		// // let regex = new RegExp(CONFIG.find, 'g')
@@ -32,24 +35,25 @@ function fixFile(file: string) {
 }
 
 function eachFile(name: string) {
-	console.log('LOCAL ->', name + '.js')
+	// console.log('LOCAL ->', name + '.js', '-> replacing all occurrences of', `"${CONFIG.find}"`, 'with', `"${CONFIG.replace}"`)
 	// console.log('GLOBAL ->', name + '.js')
 	return Promise.all([
-		fixFile(path.resolve(lroot, 'typescript/lib', name + '.js')),
+		fixFile(name, 'local'),
+		fixFile(name, 'global'),
 		// fixFile(path.resolve(groot, 'typescript/lib', name + '.js')),
 	])
 }
 
-console.log('FIXING...')
+console.log(`tsc-wtf -> replacing all occurrences of "${CONFIG.find}" with "${CONFIG.replace}" for these files ->`)
 
 Promise.all([
-	// eachFile('tsc'),
-	// eachFile('tsserver'),
-	// eachFile('tsserverlibrary'),
-	// eachFile('typescript'),
-	// eachFile('typescriptServices'),
+	eachFile('tsc'),
+	eachFile('tsserver'),
+	eachFile('tsserverlibrary'),
+	eachFile('typescript'),
+	eachFile('typescriptServices'),
 	eachFile('typingsInstaller'),
-]).then(() => console.log('DONE!'))
+]).then(() => console.log('DONE =]'))
 
 
 
