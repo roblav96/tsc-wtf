@@ -1,0 +1,54 @@
+{
+	"name": "tsc-wtf",
+	"version": "0.0.1",
+	"description": "WTF `tsc --watch` don't clear my terminal/console bro!",
+	"author": {
+		"name": "Robert Laverty",
+		"email": "roblav96@gmail.com",
+		"url": "https://github.com/roblav96"
+	},
+	"license": "ISC",
+	"homepage": "https://github.com/roblav96/tsc-wtf",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/roblav96/tsc-wtf.git"
+	},
+	"bugs": {
+		"url": "https://github.com/roblav96/tsc-wtf/issues"
+	},
+	"keywords": [
+		"terminal", "wtf", "clear", "bro", "console", "TypeScript", "Microsoft", "compiler", "language", "javascript"
+	],
+	"main": "dist/index.js",
+	"bin": {
+		"tsc-wtf": "dist/index.js"
+	},
+	"files": [
+		"dist/",
+		"LICENSE"
+	],
+	"scripts": {
+		"i": "npm install",
+		"r": "npm run watch",
+		"watch": "tsc-watch --onSuccess 'node dist/index.js'",
+		"rm": "npm run purge",
+		"purge": "npm run clean && rm -rf node_modules",
+		"clean": "rm -rf dist",
+		"build": "npm run clean && tsc",
+		"start": "node dist/index.js",
+		"prepare": "npm run build"
+	},
+	"dependencies": {
+		"fs-extra": "latest",
+		"shelljs": "latest"
+	},
+	"devDependencies": {
+		"@types/eyes": "latest",
+		"@types/fs-extra": "latest",
+		"@types/node": "latest",
+		"@types/shelljs": "latest",
+		"eyes": "latest",
+		"tsc-watch": "latest",
+		"typescript": "latest"
+	}
+}

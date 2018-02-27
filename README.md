@@ -1,2 +1,2 @@
 # tsc-wtf
-Stop tsc watch from WTF'in up your terminal/console
+WTF `tsc --watch` don't clear my terminal/console bro!
